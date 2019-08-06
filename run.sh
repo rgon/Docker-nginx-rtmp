@@ -43,11 +43,11 @@ http {
             add_header  Access-Control-Allow-Origin *;
         }
         location /dash {
-root /tmp/dash;
-add_header  Cache-Control no-cache;
-add_header  Access-Control-Allow-Origin *;
-}
-
+            alias /dev/shm/dash;
+            add_header Cache-Control no-cache;
+            add_header Access-Control-Allow-Origin *;
+            add_header  Cache-Control no-cache;
+        }
         location /on_publish {
             return  201;
         }
@@ -107,6 +107,15 @@ cat >>${NGINX_CONFIG_FILE} <<!EOF
 !EOF
     HLS="false"
 fi
+if [ "${DASH}" = "true" ]; then
+cat >>${NGINX_CONFIG_FILE} <<!EOF
+            dash on;
+            dash_path /dev/shm/dash;
+            dash_fragment 5s;
+            dash_playlist_length 30s;
+!EOF
+    DASH="false"
+fi 
     if [ "$PUSH" = "true" ]; then
         for PUSH_URL in $(echo ${RTMP_PUSH_URLS}); do
             echo "Pushing stream to ${PUSH_URL}"
@@ -118,14 +127,6 @@ fi
     fi
 cat >>${NGINX_CONFIG_FILE} <<!EOF
         }
-application rtmp {
-    live on;
-
-    dash on;
-    dash_path /tmp/dash;
-    dash_fragment 1s;
-    dash_playlist_length 5s;
-}
 !EOF
 done
 
