@@ -42,6 +42,11 @@ http {
             add_header  Cache-Control no-cache;
             add_header  Access-Control-Allow-Origin *;
         }
+        location /dash {
+root /tmp/dash;
+add_header  Cache-Control no-cache;
+add_header  Access-Control-Allow-Origin *;
+}
 
         location /on_publish {
             return  201;
@@ -113,6 +118,14 @@ fi
     fi
 cat >>${NGINX_CONFIG_FILE} <<!EOF
         }
+application rtmp {
+    live on;
+
+    dash on;
+    dash_path /tmp/dash;
+    dash_fragment 1s;
+    dash_playlist_length 5s;
+}
 !EOF
 done
 
