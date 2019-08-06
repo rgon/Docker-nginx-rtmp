@@ -46,7 +46,7 @@ RUN	cd /tmp										&&	\
 		--prefix=/opt/nginx								\
 		--with-http_ssl_module								\
 		--add-module=../nginx-rtmp-module					&&	\
-	make										&&	\
+	make CFLAGS=-Wno-error								&&	\
 	make install
 
 FROM alpine:latest
