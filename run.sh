@@ -32,6 +32,9 @@ http {
     server {
         listen          8080;
         server_name     localhost;
+        
+        root /var/www/momentolive;
+        index index.html;
 
         location /hls {
             types {
