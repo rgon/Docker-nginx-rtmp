@@ -65,5 +65,5 @@ ADD run.sh /
 EXPOSE 1935
 EXPOSE 8080
 
+COPY /livestreamPlayer.html /var/www/momentolive/index.html
 CMD /run.sh
-
