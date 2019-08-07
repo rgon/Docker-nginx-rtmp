@@ -154,13 +154,17 @@ function pauseAudio () {
 }
 function playPause () {
   if (player.paused) {
+    console.log('dash.js playing')
     player.play()
   } else {
+    console.log('dash.js pausing')
     player.pause()
   }
 }
 function reload () {
+  player.pause()
   load()
+  player.play()
   // console.log('player.duration', player.duration)
   // console.log('player.duration -1', player.duration -2)
   // player.currentTime = player.duration -1
