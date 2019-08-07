@@ -32,6 +32,7 @@ RUN	apk update		&&	\
 		zlib-dev		\
 		openssl-dev		\
 		curl			\
+		nano			\
 		make
 
 
