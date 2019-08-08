@@ -129,6 +129,7 @@ function load () {
 	var audio = document.querySelector('audio')
 	player = dashjs.MediaPlayer().create()
 	player.initialize(audio, url, true)
+	player.preload()
 	// TODO: test the following: https://reference.dashif.org/dash.js/latest/samples/low-latency/index.html
 	player.updateSettings({ 'streaming': { 'lowLatencyEnabled': false }}); // Don't, since it implies speeding up and down
 	// var player = new Audio('http://ec2-18-222-152-3.us-east-2.compute.amazonaws.com:8080/hls/momentolive.m3u8')
