@@ -114,8 +114,8 @@ if [ "${DASH}" = "true" ]; then
 cat >>${NGINX_CONFIG_FILE} <<!EOF
             dash on;
             dash_path /dev/shm/dash;
-            dash_fragment 5s;
-            dash_playlist_length 30s;
+            dash_fragment 1s;
+            dash_playlist_length 10s;
 !EOF
     DASH="false"
 fi 
