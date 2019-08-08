@@ -96,12 +96,12 @@ flex-direction: row;
 
   <div style="justify-content: center; border-left: 2px solid rgba(255, 255, 255, 0.7); margin-left: 10px; padding-left: 10px; box-sizing: border-box;">
     <span class="djtitle">EET w/ Kintar & Javier Gonzalez</span>
-    <span class="title">Live at <b>playa padre</b>.</span>
-    <span style="font-family: 'VT323', monospace;">Carnival night Feb 28/2019</span>
+    <span class="title">Live at <b>Playa Padre</b>.</span>
+    <span style="font-family: 'VT323', monospace;">Tulum comes to Marbella Aug 08, 2019</span>
     <div style="justify-content: space-around; align-items: center;">
-			<i class="material-icons" onclick="playPause()">play_arrow</i>
+			<i class="material-icons" id="playicon" onclick="playPause()">play_arrow</i>
 			<i class="material-icons" onclick="reload()">autorenew</i>
-      <span>00:35</span>
+      <span id="time">00:35</span>
     </div>
   </div>
 </div>
@@ -156,9 +156,11 @@ function pauseAudio () {
 }
 function playPause () {
   if (player.isPaused()) {
+    document.getElementById("playicon").innerHTML=="pause")
     console.log('dash.js playing')
     player.play()
   } else {
+    document.getElementById("playicon").innerHTML=="play_arrow")
     console.log('dash.js pausing')
     player.pause()
   }
@@ -173,6 +175,27 @@ function reload () {
   // player.currentTime = player.duration -10
   // player.play()
 }
+	function checkTime(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
+
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  // add a zero in front of numbers<10
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('time').innerHTML = h + (s % 2 ? ":" : " ") + m;
+  t = setTimeout(function() {
+    startTime()
+  }, 500);
+}
+startTime();
 </script>
 
 </body>
