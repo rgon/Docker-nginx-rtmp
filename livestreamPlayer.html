@@ -168,8 +168,9 @@ function playPause () {
 }
 function reload () {
   player.pause()
+  document.getElementById("playicon").innerHTML = "pause"
   load()
-  player.play()
+  // player.play()
   // console.log('player.duration', player.duration)
   // console.log('player.duration -1', player.duration -2)
   // player.currentTime = player.duration -1
